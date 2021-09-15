@@ -12,8 +12,8 @@ export default class Sketch {
   
     this.scene = new THREE.Scene();
     
+    this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
-    this.renderer.setSize( this.width, this.height );
     
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     
@@ -21,8 +21,24 @@ export default class Sketch {
 
     this.time = 0;
 
+    this.resize();
     this.addObjects();
     this.render();
+    this.setupResize();
+  }
+
+  resize() {
+    this.width = this.container.offsetWidth;
+    this.height = this.container.offsetHeight;
+
+    this.renderer.setSize( this.width, this.height );
+
+    this.camera.aspect = this.width / this.height;
+    this.camera.updateProjectionMatrix();
+  }
+
+  setupResize() {
+    window.addEventListener('resize', this.resize.bind(this));
   }
 
   addObjects() {
