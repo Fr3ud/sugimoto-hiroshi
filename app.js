@@ -1,38 +1,47 @@
 import * as THREE from 'three';
 
-let camera, scene, renderer;
-let geometry, material, mesh;
-let container;
+export default class Sketch {
+  constructor(options) {
+    this.container = options.domElement;
+    this.width = this.container.offsetWidth;
+    this.height = this.container.offsetHeight;
 
-init();
+    this.camera = new THREE.PerspectiveCamera( 70, this.width / this.height, 0.01, 10 );
+    this.camera.position.z = 1;
+  
+    this.scene = new THREE.Scene();
+    
+    this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+    this.renderer.setSize( this.width, this.height );
+    
+    this.container.appendChild(this.renderer.domElement);
 
-function init() {
+    this.time = 0;
 
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-	camera.position.z = 1;
+    this.addObjects();
+    this.render();
+  }
 
-	scene = new THREE.Scene();
+  addObjects() {
+    this.geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+    this.material = new THREE.MeshNormalMaterial();
+  
+    this.mesh = new THREE.Mesh( this.geometry, this.material );
+    this.scene.add( this.mesh );
+  }
 
-	geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-	material = new THREE.MeshNormalMaterial();
+  render() {
+    this.time += 0.05;
 
-	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
+    this.mesh.rotation.x = this.time / 2000;
+    this.mesh.rotation.y = this.time / 1000;
+  
+    this.renderer.render( this.scene, this.camera );
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	renderer.setAnimationLoop( animation );
-
-  container = document.getElementById('container');
-	container.appendChild( renderer.domElement );
-
+    requestAnimationFrame(this.render.bind(this));
+  }
 }
 
-function animation( time ) {
-
-	mesh.rotation.x = time / 2000;
-	mesh.rotation.y = time / 1000;
-
-	renderer.render( scene, camera );
-
-}
+new Sketch({
+  domElement: document.getElementById('container'),
+});
