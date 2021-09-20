@@ -1,8 +1,10 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import fragment from './shaders/fragment.glsl'
-import vertex from './shaders/vertex.glsl'
+import fragment from './shaders/fragment.glsl';
+import vertex from './shaders/vertex.glsl';
+
+import texture from './texture.jpg';
 
 export default class Sketch {
   constructor(options) {
@@ -53,8 +55,9 @@ export default class Sketch {
 
     this.geometry = new THREE.PlaneBufferGeometry( 0.5, 0.5, 100, 100 );
     this.material = new THREE.ShaderMaterial({ 
-      wireframe: true,
+      // wireframe: true,
       uniforms: {
+        uTexture: { value: new THREE.TextureLoader().load(texture) },
         time: { value: 1.0 },
         resolution: { value: new THREE.Vector2() },
       },
