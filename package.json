@@ -1,0 +1,26 @@
+{
+  "name": "sugimoto-hiroshi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fr3ud/sugimoto-hiroshi.git"
+  },
+  "author": "Alexander Pavelko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fr3ud/sugimoto-hiroshi/issues"
+  },
+  "homepage": "https://github.com/Fr3ud/sugimoto-hiroshi#readme",
+  "dependencies": {
+    "three": "^0.132.2"
+  },
+  "devDependencies": {
+    "@parcel/transformer-glsl": "^2.0.0-rc.0",
+    "@parcel/transformer-image": "^2.0.0-rc.0"
+  }
+}
