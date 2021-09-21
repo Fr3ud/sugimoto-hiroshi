@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
 
-import texture from './texture.jpg';
+import texture from './carpet.jpeg';
 
 export default class Sketch {
   constructor(options) {
