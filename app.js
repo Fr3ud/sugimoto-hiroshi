@@ -4,6 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
 
+import * as dat from 'dat.gui';
+
+
 
 export default class Sketch {
   constructor(options) {
@@ -30,10 +33,20 @@ export default class Sketch {
 
     this.time = 0;
 
+    this.setupSetings();
     this.resize();
     this.addObjects();
     this.render();
     this.setupResize();
+  }
+
+  setupSetings() {
+    this.settings = {
+      progress = 0,
+    }
+
+    this.gui = new dat.GUI();
+    this.gui.add(this.settings, 'progress', 0, 1, 0.001);
   }
 
   resize() {
