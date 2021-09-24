@@ -69,6 +69,7 @@ export default class Sketch {
       // wireframe: true,
       uniforms: {
         time: { value: 1.0 },
+        uProgress: { value: 1.0 },
         resolution: { value: new THREE.Vector2() },
       },
       vertexShader: vertex,
@@ -84,6 +85,7 @@ export default class Sketch {
     this.time += 0.05;
 
     this.material.uniforms.time.value = this.time;
+    this.material.uniforms.uProgress.value = this.settings;
 
     this.mesh.rotation.x = this.time / 2000;
     this.mesh.rotation.y = this.time / 1000;
