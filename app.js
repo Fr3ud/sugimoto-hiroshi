@@ -18,17 +18,17 @@ export default class Sketch {
     this.camera.position.z = 600;
 
     this.camera.fov = 2 * Math.atan( (this.height / 2) / 600 ) * 180 / Math.PI;
-  
+
     this.scene = new THREE.Scene();
-    
-    this.renderer = new THREE.WebGLRenderer( { 
+
+    this.renderer = new THREE.WebGLRenderer( {
       antialias: true,
       alpha: true,
     } );
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    
+
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    
+
     this.container.appendChild(this.renderer.domElement);
 
     this.time = 0;
@@ -42,7 +42,7 @@ export default class Sketch {
 
   setupSetings() {
     this.settings = {
-      progress = 0,
+      progress: 0,
     }
 
     this.gui = new dat.GUI();
@@ -65,7 +65,7 @@ export default class Sketch {
 
   addObjects() {
     this.geometry = new THREE.PlaneBufferGeometry( 350, 350, 100, 100 );
-    this.material = new THREE.ShaderMaterial({ 
+    this.material = new THREE.ShaderMaterial({
       // wireframe: true,
       uniforms: {
         time: { value: 1.0 },
@@ -76,7 +76,7 @@ export default class Sketch {
       fragmentShader: fragment,
     });
 
-  
+
     this.mesh = new THREE.Mesh( this.geometry, this.material );
     this.scene.add( this.mesh );
   }
@@ -89,7 +89,7 @@ export default class Sketch {
 
     this.mesh.rotation.x = this.time / 2000;
     this.mesh.rotation.y = this.time / 1000;
-  
+
     this.renderer.render( this.scene, this.camera );
 
     requestAnimationFrame(this.render.bind(this));
